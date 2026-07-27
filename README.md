@@ -642,11 +642,11 @@ def chat_with_preserved_thinking(client: openai.OpenAI, model_name: str):
         model=model_name,
         messages=messages,
         stream=False,
-        max_tokens=4096,
+        max_completion_tokens=4096,
         reasoning_effort="max",
     )
     # the assistant should mention 215 and 222 that appear in the prior reasoning content
-    print(f"response: {response.choices[0].message.reasoning}")
+    print(f"reasoning: {response.choices[0].message.reasoning_content}")
     return response.choices[0].message.content
 ```
 
