@@ -605,7 +605,7 @@ Kimi K3 applies quantization-aware training from the SFT stage onward, using MXF
 ## 5. Deployment
 
 > [!Note]
-> You can access Kimi K3's API on https://platform.kimi.ai by selecting `kimi-k3`, and we provide OpenAI/Anthropic-compatible API for you. Currently, Kimi K3 is recommended to run on the following inference engines:
+> You can access Kimi K3's API on https://platform.kimi.ai by selecting `kimi-k3`, and we provide an OpenAI/Anthropic-compatible API for you. Currently, Kimi K3 is recommended to run on the following inference engines:
 
 - [vLLM](https://github.com/vllm-project/vllm) — see [recipes](https://recipes.vllm.ai/moonshotai/Kimi-K3)
 - [SGLang](https://github.com/sgl-project/sglang) — see [cookbook](https://docs.sglang.io/cookbook/autoregressive/Moonshotai/Kimi-K3)
