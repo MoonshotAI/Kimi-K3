@@ -21,6 +21,10 @@
 
 
 <p align="center">
+  <b>English</b> | <a href="README_zh.md">中文</a>
+</p>
+
+<p align="center">
 📰&nbsp;&nbsp;<a href="https://www.kimi.com/blog/kimi-k3">Tech Blog</a> | &nbsp;&nbsp;&nbsp; <b>📄&nbsp;&nbsp;<a href="k3_tech_report.pdf">Full Report</a></b>
 </p>
 
