@@ -81,11 +81,11 @@ Kimi K3 is an open-weight, native multimodal agentic model and our most capable 
 <td align="center" style="vertical-align: middle; text-align: center">3072</td>
 </tr>
 <tr>
-<td align="center" style="vertical-align: middle; text-align: center"><strong>Number of Experts</strong></td>
+<td align="center" style="vertical-align: middle; text-align: center"><strong>Number of Routed Experts</strong></td>
 <td align="center" style="vertical-align: middle; text-align: center">896</td>
 </tr>
 <tr>
-<td align="center" style="vertical-align: middle; text-align: center"><strong>Selected Experts per Token</strong></td>
+<td align="center" style="vertical-align: middle; text-align: center"><strong>Routed Experts Selected per Token</strong></td>
 <td align="center" style="vertical-align: middle; text-align: center">16</td>
 </tr>
 <tr>
