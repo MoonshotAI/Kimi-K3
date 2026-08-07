@@ -122,7 +122,7 @@ Kimi K3 is an open-weight, native multimodal agentic model and our most capable 
 </tr>
 <tr>
 <td align="center" style="vertical-align: middle; text-align: center"><strong>Modality</strong></td>
-<td align="center" style="vertical-align: middle; text-align: center">Text, Image</td>
+<td align="center" style="vertical-align: middle; text-align: center">Text, Image, Video</td>
 </tr>
 </tbody>
 </table>
@@ -646,7 +646,7 @@ def chat_with_preserved_thinking(client: openai.OpenAI, model_name: str):
         reasoning_effort="max",
     )
     # the assistant should mention 215 and 222 that appear in the prior reasoning content
-    print(f"response: {response.choices[0].message.reasoning}")
+    print(f"response: {response.choices[0].message.reasoning_content}")
     return response.choices[0].message.content
 ```
 
