@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 本地生成的产物（按需自行保留，勿入库）
+generated_image.png
+generated_video.mp4
+橘猫-agent.mp4
+橘猫-cli.mp4
+
+# 工具/环境目录
+.claude/
+.workbuddy/
+.idea/
+.vscode/
