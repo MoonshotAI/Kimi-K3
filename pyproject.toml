@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kimi-k3-sdk"
+version = "0.1.0"
+description = "Python client for the Kimi K3 API - text, image and video understanding and generation"
+readme = "SDK.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = ["kimi", "kimi-k3", "moonshot", "llm", "multimodal"]
+
+dependencies = [
+    "openai>=1.40,<2",
+    "httpx>=0.27",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+kimi-k3 = "kimi_cli:main"
+
+[project.urls]
+Repository = "https://github.com/CherrieTheShifter/Kimi-K3"
+
+[tool.setuptools]
+py-modules = [
+    "kimi_multimodal",
+    "video_understanding",
+    "kimi_cli",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["."]
+python_files = ["test_*.py"]
+# The API-backed suites are interactive and need a live key; only the
+# offline suite runs by default.
+addopts = "--ignore=test_all_features.py --ignore=test_video_understanding.py --ignore=run_tests.py"

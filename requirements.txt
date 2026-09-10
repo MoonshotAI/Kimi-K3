@@ -1,0 +1,3 @@
+openai>=1.40,<2
+httpx>=0.27
+requests>=2.31

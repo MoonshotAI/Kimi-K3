@@ -1,0 +1,38 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.11", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt pytest
+
+      - name: Check every module imports and compiles
+        run: python -m compileall -q .
+
+      - name: Run the offline test suites
+        # These use mocked clients - no API key and no network.
+        run: python -m pytest test_client.py test_chat_session.py -q
+
+      - name: Check the CLI loads
+        run: python kimi_cli.py --help

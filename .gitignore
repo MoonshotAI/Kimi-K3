@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Locally generated output - keep out of the repo
+generated_image.png
+generated_video.mp4
+orange-cat-agent.mp4
+orange-cat-cli.mp4
+
+# Tool and environment directories
+.claude/
+.workbuddy/
+.idea/
+.vscode/

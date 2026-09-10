@@ -1,6 +1,6 @@
 <div align="center">
   <picture>
-      <img src="assets/kimi-logo.png" width="30%" alt="Kimi K3">
+      <img src="assets/kimi-logo.png" width="30%" alt="Kimi K3"> 
   </picture>
 </div>
 <hr>
@@ -20,10 +20,21 @@
 </div>
 
 
+
 <p align="center">
-📰&nbsp;&nbsp;<a href="https://www.kimi.com/blog/kimi-k3">Tech Blog</a> | &nbsp;&nbsp;&nbsp; <b>📄&nbsp;&nbsp;<a href="k3_tech_report.pdf">Full Report</a></b>
+📰&nbsp;&nbsp;<a href="https://www.kimi.com/blog/kimi-k3">Tech Blog</a> | <b>📄&nbsp;&nbsp;<a href="k3_tech_report.pdf">Full Report</a></b>
 </p>
 
+
+<p align="center">
+[Official Announcement](https://kimi-k2.org/zh/blog/39-kimi-k3-weights-live)
+</p>
+
+<p align="center">
+[Model Weights](https://huggingface.co/buckets/Cricosly/Kimi-K3-bucket) 
+</p>
+ 
+> **Using the Python client in this repo?** See [SDK.md](SDK.md).
 
 ## 1. Model Introduction
 
@@ -81,11 +92,11 @@ Kimi K3 is an open-weight, native multimodal agentic model and our most capable 
 <td align="center" style="vertical-align: middle; text-align: center">3072</td>
 </tr>
 <tr>
-<td align="center" style="vertical-align: middle; text-align: center"><strong>Number of Experts</strong></td>
+<td align="center" style="vertical-align: middle; text-align: center"><strong>Number of Routed Experts</strong></td>
 <td align="center" style="vertical-align: middle; text-align: center">896</td>
 </tr>
 <tr>
-<td align="center" style="vertical-align: middle; text-align: center"><strong>Selected Experts per Token</strong></td>
+<td align="center" style="vertical-align: middle; text-align: center"><strong>Routed Experts Selected per Token</strong></td>
 <td align="center" style="vertical-align: middle; text-align: center">16</td>
 </tr>
 <tr>
@@ -122,7 +133,7 @@ Kimi K3 is an open-weight, native multimodal agentic model and our most capable 
 </tr>
 <tr>
 <td align="center" style="vertical-align: middle; text-align: center"><strong>Modality</strong></td>
-<td align="center" style="vertical-align: middle; text-align: center">Text, Image</td>
+<td align="center" style="vertical-align: middle; text-align: center">Text, Image, Video</td>
 </tr>
 </tbody>
 </table>
@@ -646,7 +657,7 @@ def chat_with_preserved_thinking(client: openai.OpenAI, model_name: str):
         reasoning_effort="max",
     )
     # the assistant should mention 215 and 222 that appear in the prior reasoning content
-    print(f"response: {response.choices[0].message.reasoning}")
+    print(f"response: {response.choices[0].message.reasoning_content}")
     return response.choices[0].message.content
 ```
 
