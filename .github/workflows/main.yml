@@ -1,0 +1,83 @@
+name: Kimi K3 Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai PyGithub
+
+      - name: Run Kimi K3 Code Review
+        env:
+          MOONSHOT_API_KEY: ${{ secrets.MOONSHOT_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO_NAME: ${{ github.repository }}
+        run: |
+          python - << 'EOF'
+          import os
+          from openai import OpenAI
+          from github import Github
+
+          # Initialize Kimi K3 API client
+          client = OpenAI(
+              api_key=os.environ["MOONSHOT_API_KEY"],
+              base_url="https://api.moonshot.ai/v1"
+          )
+
+          # Get PR diff via GitHub API
+          gh = Github(os.environ["GITHUB_TOKEN"])
+          repo = gh.get_repo(os.environ["REPO_NAME"])
+          pr = repo.get_pull(int(os.environ["PR_NUMBER"]))
+          
+          # Fetch changed files/diff (truncated for prompt size safety)
+          files_changed = [f.filename for f in pr.get_files()]
+          diff_text = "\n".join([f"{f.filename}:\n{f.patch}" for f in pr.get_files() if f.patch])[:12000]
+
+          prompt = f"""
+          You are an expert senior code reviewer. Review the following Pull Request diff:
+          
+          PR Title: {pr.title}
+          PR Description: {pr.body}
+          Files Modified: {files_changed}
+          
+          Diff:
+          {diff_text}
+
+          Provide:
+          1. A brief summary of the changes.
+          2. Potential bugs, security vulnerabilities, or performance issues.
+          3. Recommendations for improvements.
+          """
+
+          response = client.chat.completions.create(
+              model="kimi-k3",
+              messages=[{"role": "user", "content": prompt}],
+              max_completion_tokens=1500
+          )
+
+          review_comment = "### 🤖 Kimi K3 Automated Code Review\n\n" + response.choices[0].message.content
+          pr.create_issue_comment(review_comment)
+          print("Successfully posted Kimi K3 review to PR.")
+          EOF
+          
